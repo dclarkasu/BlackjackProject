@@ -9,4 +9,4 @@ This project is a command-line blackjack game.
 * Inheritance
 
 * Be Descriptive
-* https://en.wikipedia.org/wiki/Blackjack
+* Blackjack rules and information: https://en.wikipedia.org/wiki/Blackjack
