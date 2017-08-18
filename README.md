@@ -6,7 +6,7 @@
 This project is a command-line blackjack game.
 
 ### Topics Covered
-Inheritance
+* Inheritance
 
-Be Descriptive
-Make a link to rules of Blackjack
+* Be Descriptive
+* https://en.wikipedia.org/wiki/Blackjack
