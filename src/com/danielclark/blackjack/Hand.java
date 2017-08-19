@@ -24,7 +24,7 @@ public class Hand {
 	}
 
 	// this is for when the player hits
-	public void addCard(Card card) {  // if the list is null (empty) then we can't add to "nothing". So we make new list
+	public Card addCard(Card card) {  // if the list is null (empty) then we can't add to "nothing". So we make new list
 
 		if (cards == null) {
 			cards = new ArrayList<Card>();
@@ -32,6 +32,7 @@ public class Hand {
 		} else {				   // if it's not null (something is there), then we add to it
 			cards.add(card);
 		}
+		return card;
 	}
 	
 	public void resetHand() {

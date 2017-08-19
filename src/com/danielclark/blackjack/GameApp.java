@@ -63,16 +63,21 @@ public class GameApp {
 	}
 	
 	public void hitOrStay(Scanner kb, int playerHandValue) {
+		String choice;
+		do {
 		System.out.println("Would you like to hit or stay?");
-		String choice = kb.next();
+		choice = kb.next();
 		if (choice.equalsIgnoreCase("hit")) {
-			p.getHand().addCard(deck.dealCard());
-			for (Card c : p.getHand().getCards()) {
-				System.out.println(c);
+			Card c = p.getHand().addCard(deck.dealCard());
+			System.out.println(c);
 				playerHandValue = playerHandValue + c.getR().getValue();
-			}
 			System.out.println("Player's Hand: " + playerHandValue);
 		}
+		if (choice.equalsIgnoreCase("stay")) {
+			// playerHandValue will stay the same
+			// turn will change	
+		}
+		} while(choice.equalsIgnoreCase("hit"));
 	}
 
 }
