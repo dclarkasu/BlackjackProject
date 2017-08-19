@@ -4,7 +4,8 @@ public class Player {
 	private String name;
 	private double wallet;
 	private Hand hand;
-
+// wallet work
+	
 	public Player() {
 		this.hand = new Hand();
 	}

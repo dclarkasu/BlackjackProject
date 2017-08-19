@@ -1,5 +1,7 @@
 package com.danielclark.blackjack;
 
+import java.util.Scanner;
+
 // Dealer ArrayList. .add to give him a card. .get to get his cards
 
 public class GameApp {
@@ -7,15 +9,32 @@ public class GameApp {
 
 	public static void main(String[] args) {
 		GameApp game = new GameApp();
+		Scanner kb = new Scanner(System.in);
 		
+		game.welcome(kb);
 		game.run();
+		game.hitOrStay();
 		
+	}
+	
+	public void welcome(Scanner kb) {
+		System.out.println("Welcome to the Blackjack table");
+		System.out.println("Are you ready to play (Y/N)");
+		String choice = kb.next();
+		if(choice.equalsIgnoreCase("y")) {
+			System.out.println("Please enter your name: ");
+			String name = kb.next();
+			p.setName(name);
+			
+		} else {
+			System.exit(0);
+		}
 	}
 	
 	public void run() {
 		Deck deck = initializeDeck();
 		for (Card c : deck.getCards()) {
-			System.out.println(c.getR() + " of " + c.getS() + " " + c.getR().getValue());
+//			System.out.println(c.getR() + " of " + c.getS() + " " + c.getR().getValue()); // prints out whole deck
 		}
 		p.getHand().addCard(deck.dealCard());
 		p.getHand().addCard(deck.dealCard());
@@ -43,6 +62,9 @@ public class GameApp {
 		return deck;
 	}
 	
+	public void hitOrStay( ) {
+		System.out.println("");
+	}
 
 }
 
