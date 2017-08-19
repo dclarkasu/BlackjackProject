@@ -6,14 +6,15 @@ import java.util.Scanner;
 
 public class GameApp {
 	private Player p = new Player();
+	private Deck deck = new Deck();
 
 	public static void main(String[] args) {
 		GameApp game = new GameApp();
 		Scanner kb = new Scanner(System.in);
 		
 		game.welcome(kb);
-		game.run();
-		game.hitOrStay();
+		int playerHandValue = game.run();
+		game.hitOrStay(kb, playerHandValue);
 		
 	}
 	
@@ -31,14 +32,14 @@ public class GameApp {
 		}
 	}
 	
-	public void run() {
-		Deck deck = initializeDeck();
+	public int run() {
+		deck = initializeDeck();
 		for (Card c : deck.getCards()) {
-//			System.out.println(c.getR() + " of " + c.getS() + " " + c.getR().getValue()); // prints out whole deck
+//		System.out.println(c.getR() + " of " + c.getS() + " " + c.getR().getValue()); // prints out whole deck
 		}
 		p.getHand().addCard(deck.dealCard());
 		p.getHand().addCard(deck.dealCard());
-		System.out.println(deck.getCards().size());
+//		System.out.println(deck.getCards().size());
 		
 		int playerHandValue = 0;
 		for (Card c : p.getHand().getCards()) { // printing out the player's hand. Have to not only get Hand object but his actual cards
@@ -46,11 +47,10 @@ public class GameApp {
 			playerHandValue = playerHandValue + c.getR().getValue();
 		}
 		System.out.println("Player's Hand: " + playerHandValue);
-		
+		return playerHandValue;
 	}
 	
 	public Deck initializeDeck() {  // create deck first so we have somewhere to store Cards next
-		Deck deck = new Deck();
 		
 		for(Suit s : Suit.values()) {     // iterates through Suit enums
 			for(Rank r : Rank.values()) { // gives values to cards
@@ -62,8 +62,17 @@ public class GameApp {
 		return deck;
 	}
 	
-	public void hitOrStay( ) {
-		System.out.println("");
+	public void hitOrStay(Scanner kb, int playerHandValue) {
+		System.out.println("Would you like to hit or stay?");
+		String choice = kb.next();
+		if (choice.equalsIgnoreCase("hit")) {
+			p.getHand().addCard(deck.dealCard());
+			for (Card c : p.getHand().getCards()) {
+				System.out.println(c);
+				playerHandValue = playerHandValue + c.getR().getValue();
+			}
+			System.out.println("Player's Hand: " + playerHandValue);
+		}
 	}
 
 }
