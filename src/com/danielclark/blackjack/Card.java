@@ -21,6 +21,18 @@ public class Card {
 	public void setS(Suit s) {
 		this.s = s;
 	}
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Card [r=");
+		builder.append(r);
+		builder.append(", s=");
+		builder.append(s);
+		builder.append("]");
+		return builder.toString();
+	}
+	
+	
 
 	//card.getrank().getvalue();
 }
