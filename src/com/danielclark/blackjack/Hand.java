@@ -38,7 +38,10 @@ public class Hand {
 		cards = new ArrayList<Card>();
 	}
 	
-	
+	public void displayHand() {
+		
+	}
 
-	// will have List<Card>
+	// get value of cards in hand?
+	//get betAmt?
 }

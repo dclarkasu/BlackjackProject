@@ -25,6 +25,5 @@ public class Player {
 		this.hand = hand;
 	}
 	
-	// will have a List<Hand>
-
+	
 }

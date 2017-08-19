@@ -6,7 +6,6 @@ public class Card {
 	
 	
 	public Card(Rank r, Suit s) {
-		super();
 		this.r = r;
 		this.s = s;
 	}
