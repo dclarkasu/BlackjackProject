@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-// Dealer ArrayList. .add to give him a card. .get to get his cards
-
 public class GameApp {
 	private Player p = new Player();
 	private Deck deck = new Deck();
@@ -18,6 +16,7 @@ public class GameApp {
 		game.welcome(kb);
 		game.run();
 		game.hitOrStay(kb);
+		game.dealerTurn();
 		
 	}
 	
@@ -50,20 +49,10 @@ public class GameApp {
 		dealer.add(deck.dealCard());
 		showDealerHand("ONE");
 		int dealerHandValue = valueOfDealerHand();
-		System.out.println("Dealer's Hand: " + dealerHandValue + "\n");
+//		System.out.println("Dealer's Hand: " + dealerHandValue + "\n");
 		checkHandValue(playerHandValue, dealerHandValue);
 //		System.out.println(deck.getCards().size());
 		
-//		for (Card c : p.getHand().getCards()) { // printing out the player's hand. Have to not only get Hand object but his actual cards
-//			System.out.println(c);
-//			playerHandValue = playerHandValue + c.getR().getValue();
-//		}
-		
-		
-//		if(playerHandValue == 21) {
-//			
-//		}
-//		return playerHandValue;
 	}
 	
 	public Deck initializeDeck() {  // create deck first so we have somewhere to store Cards next
@@ -79,7 +68,6 @@ public class GameApp {
 	}
 	
 	public void hitOrStay(Scanner kb) {
-		// Need to add actions for getting blackjack or busting
 		int playerHandValue = valueOfPlayerHand();
 		String choice;
 		do {
@@ -94,33 +82,33 @@ public class GameApp {
 //			System.out.println(deck.getCards().size()); // prints size of deck after each hit
 		}
 		if (choice.equalsIgnoreCase("stay")) {
-			
+			dealerTurn();
 		}
 		} while(choice.equalsIgnoreCase("hit"));
-		
-		//while the dealers value is <= 17
+
 	}
 	
-//	public void dealerAction() {
-//		dealer
-//		
-//	}
 	
 	public void checkHandValue(int playerHandValue, int dealerHandValue) {
 		if(playerHandValue > 21) {
-			System.out.println(p.getName() + " You have busted. Game over");
+			System.out.println(p.getName() + " You have busted. House wins, game over");
+			System.exit(0);
 		}
-		if(playerHandValue == 21) {
+		else if(playerHandValue == 21) {
 			System.out.println(p.getName() + " Congratulations! You won.");
+			System.exit(0);
 			//add money to player wallet
 		}
 		if(dealerHandValue > 21) {
-			System.out.println(p.getName() + " You have busted. Game over");
+			System.out.println("Dealer," + " You have busted. Player wins, game over");
+			System.exit(0);
 		}
-		if(dealerHandValue == 21) {
-			System.out.println(p.getName() + " Congratulations! You won.");
+		else if(dealerHandValue == 21) {
+			System.out.println("Dealer," + " Congratulations! You won.");
+			System.exit(0);
 			//add money to player wallet
 		}
+		
 	}
 	
 	public void showPlayerHand() {
@@ -155,17 +143,20 @@ public class GameApp {
 		}
 		return val;
 	}
+	
+	public void dealerTurn() {
+		int dealerHandValue = valueOfDealerHand();
+		while (valueOfDealerHand() <= 17) {
+			dealer.add(deck.dealCard());
+			showDealerHand("ALL");
+			dealerHandValue = valueOfDealerHand();
+			System.out.println("Dealer's Hand: " + dealerHandValue + "\n");
+			checkHandValue(0, dealerHandValue);
+		}
+		checkHandValue(0, dealerHandValue);
+	}
 
 }
-
-// ask player to hit or stay
-// if hit, then get player hand, add a card, deal card
-
-
-
-
-
-
 
 
 
