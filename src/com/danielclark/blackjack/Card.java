@@ -24,7 +24,7 @@ public class Card {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Card [r=");
+		builder.append("[r=");
 		builder.append(r);
 		builder.append(", s=");
 		builder.append(s);

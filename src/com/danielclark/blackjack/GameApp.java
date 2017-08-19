@@ -37,29 +37,32 @@ public class GameApp {
 	
 	public void run() {
 		deck = initializeDeck();
-		for (Card c : deck.getCards()) {
-//		System.out.println(c.getR() + " of " + c.getS() + " " + c.getR().getValue()); // prints out whole deck
-		}
+//		for (Card c : deck.getCards()) {
+////		System.out.println(c.getR() + " of " + c.getS() + " " + c.getR().getValue()); // prints out whole deck
+//		}
 		p.getHand().addCard(deck.dealCard());
 		p.getHand().addCard(deck.dealCard());
+		showPlayerHand();
+		int playerHandValue = valueOfPlayerHand();
+		System.out.println("Player's Hand: " + playerHandValue+ "\n");
+
 		dealer.add(deck.dealCard());
 		dealer.add(deck.dealCard());
+		showDealerHand("ONE");
+		int dealerHandValue = valueOfDealerHand();
+		System.out.println("Dealer's Hand: " + dealerHandValue + "\n");
+		checkHandValue(playerHandValue, dealerHandValue);
 //		System.out.println(deck.getCards().size());
 		
-		int playerHandValue = valueOfPlayerHand();
-		int dealerHandValue = valueOfDealerHand();
 //		for (Card c : p.getHand().getCards()) { // printing out the player's hand. Have to not only get Hand object but his actual cards
 //			System.out.println(c);
 //			playerHandValue = playerHandValue + c.getR().getValue();
 //		}
 		
-		showPlayerHand();
-		showDealerHand("ONE");
 		
-		System.out.println("Player's Hand: " + playerHandValue);
-		if(playerHandValue == 21) {
-			
-		}
+//		if(playerHandValue == 21) {
+//			
+//		}
 //		return playerHandValue;
 	}
 	
@@ -87,11 +90,11 @@ public class GameApp {
 			System.out.println(c);
 				playerHandValue = playerHandValue + c.getR().getValue();
 			System.out.println("Player's Hand: " + playerHandValue);
-			System.out.println(deck.getCards().size()); // prints size of deck after each hit
+			checkHandValue(playerHandValue, 0);
+//			System.out.println(deck.getCards().size()); // prints size of deck after each hit
 		}
 		if (choice.equalsIgnoreCase("stay")) {
-			// playerHandValue will stay the same
-			// turn will change	
+			
 		}
 		} while(choice.equalsIgnoreCase("hit"));
 		
@@ -103,12 +106,19 @@ public class GameApp {
 //		
 //	}
 	
-	public void checkHandValue(int playerHandValue) {
+	public void checkHandValue(int playerHandValue, int dealerHandValue) {
 		if(playerHandValue > 21) {
-			System.out.println("You have busted. Game over");
+			System.out.println(p.getName() + " You have busted. Game over");
 		}
 		if(playerHandValue == 21) {
-			System.out.println("Congratulations! You won.");
+			System.out.println(p.getName() + " Congratulations! You won.");
+			//add money to player wallet
+		}
+		if(dealerHandValue > 21) {
+			System.out.println(p.getName() + " You have busted. Game over");
+		}
+		if(dealerHandValue == 21) {
+			System.out.println(p.getName() + " Congratulations! You won.");
 			//add money to player wallet
 		}
 	}
@@ -121,7 +131,7 @@ public class GameApp {
 	
 	public void showDealerHand(String amount) {
 		if(amount.equals("ONE")) {
-			System.out.println(dealer.get(0));
+			System.out.println("Dealer hand: " + dealer.get(0));
 		}
 		else if(amount.endsWith("ALL")) {
 			for (Card card : dealer) {
