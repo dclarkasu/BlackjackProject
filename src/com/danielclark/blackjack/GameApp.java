@@ -12,24 +12,27 @@ public class GameApp {
 	public static void main(String[] args) {
 		GameApp game = new GameApp();
 		Scanner kb = new Scanner(System.in);
+		Hand hand = new Hand();
 
 		game.welcome(kb);
-		
-		do{
-		game.run();
-		game.hitOrStay(kb);
-		if (game.valueOfPlayerHand() <= 21) {
-			game.dealerTurn();
-		}
-		game.checkForWin();
-		}while(game.playAgain(kb));
-	
+
+		do {
+			game.run();
+			game.hitOrStay(kb);
+			if (game.valueOfPlayerHand() <= 21) {
+				game.dealerTurn();
+			}
+			game.checkForWin();
+			hand.resetHand();
+		} while (game.playAgain(kb, hand));
+
 	}
-	
-	public boolean playAgain(Scanner kb) {
+
+	public boolean playAgain(Scanner kb, Hand hand) {
 		System.out.println("Would you like to play again?");
 		String answer = kb.next();
-		if(answer.equalsIgnoreCase("yes") || answer.equalsIgnoreCase("y") || answer.equalsIgnoreCase("ya")) {
+		if (answer.equalsIgnoreCase("yes") || answer.equalsIgnoreCase("y") || answer.equalsIgnoreCase("ya")) {
+			hand.resetHand();
 			return true;
 		} else {
 			return false;
@@ -45,8 +48,6 @@ public class GameApp {
 			String name = kb.next();
 			p.setName(name);
 
-		} else {
-			System.exit(0);
 		}
 	}
 
@@ -123,28 +124,21 @@ public class GameApp {
 				System.out.println("BlackJack Push");
 			}
 		} else {
-			if (playerHandValue > 21 && dealerHandValue<21) {
+			if (playerHandValue > 21 && dealerHandValue < 21) {
 				System.out.println(p.getName() + ", you have busted. House wins, game over");
-				System.exit(0);
-			} else if (dealerHandValue > 21 && playerHandValue <=21) {
-				
+			} else if (dealerHandValue > 21 && playerHandValue <= 21) {
+
 				System.out.println(p.getName() + " Won! Dealer Busted");
-				System.exit(0);
-				// add money to player wallet
-				// add money to player wallet
 			} else if (playerHandValue > dealerHandValue) {
 				System.out.println(p.getName() + ", congratulations! You won.");
-				System.exit(0);
 			} else if (dealerHandValue > playerHandValue) {
 				showDealerHand("ALL");
 				System.out.println(valueOfDealerHand());
 				System.out.println("Dealer Wins");
-				System.exit(0);
 			} else if (dealerHandValue == playerHandValue) {
 				showDealerHand("ALL");
 				System.out.println(valueOfDealerHand());
 				System.out.println("Dealer Player push");
-				System.exit(0);
 				// add money to player wallet
 			}
 		}
