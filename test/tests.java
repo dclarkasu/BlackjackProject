@@ -38,13 +38,16 @@ public class tests {
 	}
 
 	@Test
-	public void test_deal_p_a_card_and_it_should_get_removed() {
+	public void test_deal_a_card_and_it_should_get_removed() {
 		assertEquals(52, deck.getCards().size());
 		assertNull(p.getHand().getCards()); // null because there are no cards in the hand
 		p.getHand().addCard(deck.dealCard());
 		assertEquals(51, deck.getCards().size());
 		assertNotNull(p.getHand().getCards()); //
 	}
+	
+//	@Test
+//	public void 
 	
 //	@Test
 //	public void test() {

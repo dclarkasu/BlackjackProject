@@ -24,11 +24,11 @@ public class Card {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("[r=");
+//		builder.append("[);
 		builder.append(r);
-		builder.append(", s=");
+		builder.append(" of ");
 		builder.append(s);
-		builder.append("]");
+//		builder.append("]");
 		return builder.toString();
 	}
 	

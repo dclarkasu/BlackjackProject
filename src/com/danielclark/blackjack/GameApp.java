@@ -23,21 +23,10 @@ public class GameApp {
 				game.dealerTurn();
 			}
 			game.checkForWin();
-			hand.resetHand();
 		} while (game.playAgain(kb, hand));
 
 	}
 
-	public boolean playAgain(Scanner kb, Hand hand) {
-		System.out.println("Would you like to play again?");
-		String answer = kb.next();
-		if (answer.equalsIgnoreCase("yes") || answer.equalsIgnoreCase("y") || answer.equalsIgnoreCase("ya")) {
-			hand.resetHand();
-			return true;
-		} else {
-			return false;
-		}
-	}
 
 	public void welcome(Scanner kb) {
 		System.out.println("Welcome to the Blackjack table");
@@ -200,12 +189,25 @@ public class GameApp {
 	}
 
 	public void dealerTurn() {
+
 		int dealerHandValue = valueOfDealerHand();
 		while (valueOfDealerHand() <= 17) {
 			dealer.add(deck.dealCard());
 			showDealerHand("ALL");
 			dealerHandValue = valueOfDealerHand();
 			System.out.println("Dealer's Hand: " + dealerHandValue + "\n");
+		}
+	}
+	
+	public boolean playAgain(Scanner kb, Hand hand) {
+		System.out.println("Would you like to play again?");
+		String answer = kb.next();
+		if (answer.equalsIgnoreCase("yes") || answer.equalsIgnoreCase("y") || answer.equalsIgnoreCase("ya")) {
+			p.getHand().resetHand();
+			dealer.removeAll(dealer);
+			return true;
+		} else {
+			return false;
 		}
 	}
 
