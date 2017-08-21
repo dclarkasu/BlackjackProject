@@ -18,7 +18,9 @@ public class GameApp {
 
 		do {
 			game.run();
-			game.hitOrStay(kb);
+			if (game.valueOfPlayerHand() != 21 && game.valueOfDealerHand() != 21) {
+				game.hitOrStay(kb);
+			}
 			if (game.valueOfPlayerHand() <= 21) {
 				game.dealerTurn();
 			}
@@ -57,7 +59,7 @@ public class GameApp {
 		showDealerHand("ONE");
 		int dealerHandValue = valueOfDealerHand();
 		// System.out.println("Dealer's Hand: " + dealerHandValue + "\n");
-		checkForWin();
+		initialCheck();
 		// System.out.println(deck.getCards().size());
 
 	}
@@ -104,15 +106,7 @@ public class GameApp {
 		int playerHandValue = valueOfPlayerHand();
 		int dealerHandValue = valueOfDealerHand();
 
-		if (p.getHand().getCards().size() == 2 && dealer.size() == 2) {
-			if (playerHandValue == 21 && dealerHandValue != 21) {
-				System.out.println("BlackJack Player Wins");
-			} else if (playerHandValue != 21 && dealerHandValue == 21) {
-				System.out.println("BlackJack Dealer Wins");
-			} else if (playerHandValue == 21 && dealerHandValue == 21) {
-				System.out.println("BlackJack Push");
-			}
-		} else {
+		
 			if (playerHandValue > 21 && dealerHandValue < 21) {
 				System.out.println(p.getName() + ", you have busted. House wins, game over");
 			} else if (dealerHandValue > 21 && playerHandValue <= 21) {
@@ -130,18 +124,21 @@ public class GameApp {
 				System.out.println("Dealer Player push");
 				// add money to player wallet
 			}
+	
+	}
+	
+	public void initialCheck() {
+		
+		int playerHandValue = valueOfPlayerHand();
+		int dealerHandValue = valueOfDealerHand();
+		
+		if (playerHandValue == 21 && dealerHandValue != 21) {
+			System.out.println("BlackJack Player Wins");
+		} else if (playerHandValue != 21 && dealerHandValue == 21) {
+			System.out.println("BlackJack Dealer Wins");
+		} else if (playerHandValue == 21 && dealerHandValue == 21) {
+			System.out.println("BlackJack Push");
 		}
-		// else if( playerHandValue > dealerHandValue) {
-		// System.out.println(p.getName() + ", congratulations! You won.");
-		// showPlayerHand();
-		// System.out.println(playerHandValue);
-		// }
-		// else if( dealerHandValue > playerHandValue) {
-		// System.out.println("Dealer, congratulations! You won.");
-		// showDealerHand("ALL");
-		// System.out.println(dealerHandValue);
-		// }
-
 	}
 
 	public void showPlayerHand() {
@@ -212,3 +209,10 @@ public class GameApp {
 	}
 
 }
+
+
+
+
+
+
+
